@@ -1,0 +1,10 @@
+{
+  "name": "aspnetcore-allinone-demo",
+  "dependencies": {
+    "angular": "registry:dt/angular#1.6.0+20170321201455",
+    "angular-route": "registry:dt/angular-route#1.3.0+20161206185711"
+  },
+  "globalDependencies": {
+    "jquery": "registry:dt/jquery#1.10.0+20170310222111"
+  }
+}
