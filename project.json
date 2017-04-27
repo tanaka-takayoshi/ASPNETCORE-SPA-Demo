@@ -26,10 +26,10 @@
     "Microsoft.AspNetCore.SpaServices": "1.1.0",
     "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.1.2",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.1.1",
-    "Microsoft.EntityFrameworkCore.Tools": {
-      "version": "1.1.0",
-      "type": "build"
-    },
+    // "Microsoft.EntityFrameworkCore.Tools": {
+    //   "version": "1.0.0-preview2-final",
+    //   "type": "build"
+    // },
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.1",
     "Microsoft.Extensions.Configuration.CommandLine": "1.1.1",
     "Microsoft.Extensions.Configuration.Json": "1.1.1",
@@ -57,13 +57,8 @@
       "version": "1.0.0-preview2-final",
       "imports": "portable-net45+win8+dnxcore50"
     },
-    "Microsoft.EntityFrameworkCore.Tools": {
-      "version": "1.1.0",
-      "imports": [
-        "portable-net45+win8+dnxcore50",
-        "portable-net45+win8"
-      ]
-    },
+    "Microsoft.EntityFrameworkCore.Tools": "1.1.0",
+    "Microsoft.EntityFrameworkCore.Tools.DotNet": "1.1.0-preview4-final",
     "Microsoft.Extensions.SecretManager.Tools": {
       "version": "1.0.0",
       "imports": "portable-net45+win8+dnxcore50"

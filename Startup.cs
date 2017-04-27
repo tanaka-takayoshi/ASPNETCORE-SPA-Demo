@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
+using ASPNETCore.SPADemo.Models;
 
 namespace ASPNETCore.SPADemo
 {
@@ -32,6 +34,12 @@ namespace ASPNETCore.SPADemo
         {
             // Add framework services.
             services.AddMvc();
+
+            var svc = Environment.GetEnvironmentVariable("SQLDB_SVC_NAME"); //SQLSERVER_RHEL_DEV
+            var server = Environment.GetEnvironmentVariable($"{svc}_SERVICE_HOST");
+            var port = Environment.GetEnvironmentVariable($"{svc}_SERVICE_PORT");
+            var connection = $@"Server={server};Port={port};Database=ASPNETCore_SPA_Demo_Dev";
+            services.AddDbContext<ItemContext>(options => options.UseSqlServer(connection));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

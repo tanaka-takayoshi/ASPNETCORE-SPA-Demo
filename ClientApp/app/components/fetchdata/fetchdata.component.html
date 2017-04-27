@@ -7,18 +7,18 @@
 <table class='table' *ngIf="forecasts">
     <thead>
         <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>Id</th>
+            <th>Completed?</th>
+            <th>Description</th>
+            <th>Dedline</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let forecast of forecasts">
-            <td>{{ forecast.dateFormatted }}</td>
-            <td>{{ forecast.temperatureC }}</td>
-            <td>{{ forecast.temperatureF }}</td>
-            <td>{{ forecast.summary }}</td>
+            <td>{{ forecast.itemId }}</td>
+            <td>{{ forecast.completed }}</td>
+            <td>{{ forecast.description }}</td>
+            <td>{{ forecast.deadline }}</td>
         </tr>
     </tbody>
 </table>
