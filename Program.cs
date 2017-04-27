@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using ASPNETCore.SPADemo.Models;
 using Microsoft.AspNetCore.Hosting;
 
 namespace ASPNETCore.SPADemo
