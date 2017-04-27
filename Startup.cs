@@ -38,7 +38,7 @@ namespace ASPNETCore.SPADemo
             var svc = Environment.GetEnvironmentVariable("SQLDB_SVC_NAME"); //SQLSERVER_RHEL_DEV
             var server = Environment.GetEnvironmentVariable($"{svc}_SERVICE_HOST");
             var port = Environment.GetEnvironmentVariable($"{svc}_SERVICE_PORT");
-            var connection = $@"Server={server};Port={port};Database=ASPNETCore_SPA_Demo_Dev";
+            var connection = $@"Server={server},{port};Database=ASPNETCore_SPA_Demo_Dev";
             services.AddDbContext<ItemContext>(options => options.UseSqlServer(connection));
         }
 
