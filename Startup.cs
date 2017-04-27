@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using ASPNETCore.SPADemo.Models;
+using ASPNETCore.SPADemo.Controllers;
 
 namespace ASPNETCore.SPADemo
 {
@@ -30,7 +31,7 @@ namespace ASPNETCore.SPADemo
             Configuration = builder.Build();
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             // Add framework services.
             services.AddMvc();
@@ -42,6 +43,49 @@ namespace ASPNETCore.SPADemo
             var password = Environment.GetEnvironmentVariable($"SQLDB_PASSWORD");
             var connection = $@"Server={server},{port};Database=ASPNETCore_SPA_Demo_Dev;User Id={user};Password={password}";
             services.AddDbContext<ItemContext>(options => options.UseSqlServer(connection));
+
+            services.Configure<Config>(config =>
+            {
+                config.Env = "Demo on Development";
+            });
+        }
+
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            // Add framework services.
+            services.AddMvc();
+
+            var svc = Environment.GetEnvironmentVariable("SQLDB_SVC_NAME"); //SQLSERVER_RHEL_DEV
+            var server = Environment.GetEnvironmentVariable($"{svc}_SERVICE_HOST");
+            var port = Environment.GetEnvironmentVariable($"{svc}_SERVICE_PORT");
+            var user = Environment.GetEnvironmentVariable($"SQLDB_USER");
+            var password = Environment.GetEnvironmentVariable($"SQLDB_PASSWORD");
+            var connection = $@"Server={server},{port};Database=ASPNETCore_SPA_Demo_Dev;User Id={user};Password={password}";
+            services.AddDbContext<ItemContext>(options => options.UseSqlServer(connection));
+
+            services.Configure<Config>(config =>
+            {
+                config.Env = "DEMO on Production";
+            });
+        }
+
+        public void ConfigurServices(IServiceCollection services)
+        {
+            // Add framework services.
+            services.AddMvc();
+
+            var svc = Environment.GetEnvironmentVariable("SQLDB_SVC_NAME"); //SQLSERVER_RHEL_DEV
+            var server = Environment.GetEnvironmentVariable($"{svc}_SERVICE_HOST");
+            var port = Environment.GetEnvironmentVariable($"{svc}_SERVICE_PORT");
+            var user = Environment.GetEnvironmentVariable($"SQLDB_USER");
+            var password = Environment.GetEnvironmentVariable($"SQLDB_PASSWORD");
+            var connection = $@"Server={server},{port};Database=ASPNETCore_SPA_Demo_Dev;User Id={user};Password={password}";
+            services.AddDbContext<ItemContext>(options => options.UseSqlServer(connection));
+
+            services.Configure<Config>(config =>
+            {
+                config.Env = "Unkown";
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -51,9 +95,9 @@ namespace ASPNETCore.SPADemo
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
-                    HotModuleReplacement = true
-                });
+                // app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
+                //     HotModuleReplacement = true
+                // });
             }
             else
             {

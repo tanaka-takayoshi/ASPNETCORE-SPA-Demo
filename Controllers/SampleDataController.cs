@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ASPNETCore.SPADemo.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace ASPNETCore.SPADemo.Controllers
 {
@@ -12,42 +13,29 @@ namespace ASPNETCore.SPADemo.Controllers
     {
 
         private ItemContext itemContext;
+        private Config config;
 
-        public SampleDataController(ItemContext itemContext)
+        public SampleDataController(ItemContext itemContext, IOptions<Config> config)
         {
             this.itemContext = itemContext;
+            this.config = config.Value;
         }
-        private static string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
         [HttpGet("[action]")]
-        public IEnumerable<Item> WeatherForecasts()
+        public IEnumerable<Item> TodoItems()
         {
-            // var rng = new Random();
-            // return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            // {
-            //     DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
-            //     TemperatureC = rng.Next(-20, 55),
-            //     Summary = Summaries[rng.Next(Summaries.Length)]
-            // });
             return itemContext.Items.ToArray();
         }
 
-        public class WeatherForecast
+        [HttpGet("[action]")]
+        public Config Config()
         {
-            public string DateFormatted { get; set; }
-            public int TemperatureC { get; set; }
-            public string Summary { get; set; }
-
-            public int TemperatureF
-            {
-                get
-                {
-                    return 32 + (int)(TemperatureC / 0.5556);
-                }
-            }
+            return config;
         }
+    }
+
+    public class Config
+    {
+        public string Env { get; set; }
     }
 }

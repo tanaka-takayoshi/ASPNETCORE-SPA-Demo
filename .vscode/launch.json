@@ -6,12 +6,15 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.1/aspnetcore-allinone-demo.dll",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.1/ASPNETCore.SPADemo.dll",
             "args": [],
             "cwd": "${workspaceRoot}",
             "console": "internalConsole",
             "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart"
+            "internalConsoleOptions": "openOnSessionStart",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
         },
         {
             "name": ".NET Core Attach",

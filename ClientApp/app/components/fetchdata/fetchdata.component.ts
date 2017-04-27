@@ -6,11 +6,16 @@ import { Http } from '@angular/http';
     templateUrl: './fetchdata.component.html'
 })
 export class FetchDataComponent {
-    public forecasts: Item[];
+    public items: Item[];
+    public config: Config;
 
     constructor(http: Http) {
-        http.get('/api/SampleData/WeatherForecasts').subscribe(result => {
-            this.forecasts = result.json() as Item[];
+        http.get('/api/SampleData/TodoItems').subscribe(result => {
+            this.items = result.json() as Item[];
+        });
+
+        http.get('/api/SampleData/Config').subscribe(result => {
+            this.config = result.json() as Config;
         });
     }
 }
@@ -21,3 +26,8 @@ interface Item {
     description: string;
     deadline: Date;
 }
+
+interface Config {
+    env: string;
+}
+
