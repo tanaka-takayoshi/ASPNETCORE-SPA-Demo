@@ -45,6 +45,10 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.1.0",
       "type": "build"
+    },
+    "Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Design": {
+      "version": "1.1.0-preview4-final",
+      "type": "build"
     }
   },
 
@@ -52,6 +56,9 @@
     "Microsoft.AspNetCore.Razor.Tools": {
       "version": "1.1.0-preview4-final",
       "imports": "portable-net45+win8+dnxcore50"
+    },
+    "Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Tools": {
+      "version": "1.1.0-preview4-final"
     },
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": {
       "version": "1.0.0-preview2-final",
@@ -101,7 +108,10 @@
       "npm install", 
       "node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env.prod",
       "node node_modules/webpack/bin/webpack.js --env.prod"
-    ]
+    ],
+    "postpublish": [
+      "dotnet razor-precompile --configuration %publish:Configuration% --framework %publish:TargetFramework% --output-path %publish:OutputPath% %publish:ProjectPath%"
+    ] 
   },
   "tooling": {
     "defaultNamespace": "ASPNETCore.SPADemo"
